@@ -1,5 +1,5 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 const Client = require('./controller/axios');
 const myClient = new Client();
 app.get('/', function (req, res) {
@@ -8,6 +8,18 @@ app.get('/', function (req, res) {
 
 app.get('/vegconomist', function (req, res) {
   myClient.get_vegconomist().then(response => {
+    res.send(response);
+  });
+});
+
+app.get('/vegconomist/all', function (req, res) {
+  myClient.get_multiple_posts().then(response => {
+    res.send(response);
+  });
+});
+
+app.get('/all', function (req, res) {
+  myClient.get_all_publisher().then(response => {
     res.send(response);
   });
 });
